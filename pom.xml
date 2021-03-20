@@ -7,11 +7,16 @@
     <groupId>network.thezone.yace</groupId>
     <artifactId>yace</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
+    <modules>
+        <module>core</module>
+    </modules>
 
     <build>
         <plugins>
