@@ -7,12 +7,12 @@ import network.thezone.yace.init.Initializer;
  * encapsulates the behaviour of the game.
  */
 
-public abstract class Game {
+public abstract class MatchController {
 
     protected GameState gameState;
     protected Board board;
 
-    public Game(Initializer initializer) {
+    public MatchController(Initializer initializer) {
         gameState = initializer.initGameState();
     }
 
