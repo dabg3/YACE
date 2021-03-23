@@ -11,5 +11,7 @@ import network.thezone.yace.core.Side;
 
 public interface Board {
 
-    //return? getPosition(Piece piece, Side side);
+    //encode square with an enum?
+    Piece getPieceBySquare(String square);
+
 }

@@ -3,7 +3,7 @@ package network.thezone.yace.core;
 /*
  * Encapsulates game state
  */
-public class GameState {
+public abstract class MatchState {
 
     private Side sideToMove;
     /*
@@ -11,5 +11,7 @@ public class GameState {
      *      - castling rights
      *      - en passant square
      *      - fifty move rule trackers
+     *      - previous moves
      */
+
 }
