@@ -4,7 +4,9 @@ import network.thezone.yace.core.GameController;
 
 class FenParser {
 
-    FenParser(GameController gameController) {
+
+
+    FenParser() {
 
     }
 
