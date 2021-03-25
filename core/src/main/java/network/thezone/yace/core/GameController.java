@@ -1,26 +1,36 @@
 package network.thezone.yace.core;
 
-import network.thezone.yace.core.board.Board;
-import network.thezone.yace.init.MatchInitializer;
+import java.util.Set;
 
 /*
- * encapsulates the behaviour of the game.
+ * Responsibilities
+ *  - enforcing rules:
+ *      - outcome of captures
+ *      - piece moves (i.e bishop cannot jump other pieces, king left in check)
  */
 
 public abstract class GameController {
 
-    protected MatchState matchState;
     protected Board board;
+    protected Side sideToMove;
+    protected boolean[] castlingRights;
+    protected Set<Square> enPassantTargetSquares;
+    protected int halfmoveClock;
+    protected int fullmoveClock;
+    //protected List<Move> pastMoves;
 
-    public void startNewMatch(MatchInitializer matchInitializer) {
-        matchState = matchInitializer.initState();
-        board = matchInitializer.initBoard();
+    abstract static class Builder<T extends Builder<T>> {
+
+        Board board;
+
+        abstract GameController build();
+
+        protected abstract T self();
     }
 
-    //how to encode moves? String as placeholder
-    //However square names (b4,d3..) should be passed, not bitboards which
-    //are an implementation detail
-    public abstract boolean makeMove(String move);
+    GameController(Builder<?> builder) {
 
-    //public abstract set<Moves> generateAllMoves();
+    }
+
+
 }

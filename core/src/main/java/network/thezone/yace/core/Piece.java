@@ -8,11 +8,10 @@ public enum Piece {
     BISHOP,
     QUEEN,
     KING,
-    PAWN
+    PAWN;
 
     /*
-     * it would be better to order pieces according to their value?
-     * No, it might be misleading given that knight and bishop are equal.
-     * Placement is only used for array indexes mapping.
+     * It would be better to have different entries for black and white pieces?
+     * Postponing this question...
      */
 }
