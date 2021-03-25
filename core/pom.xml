@@ -12,4 +12,17 @@
     <groupId>network.thezone.yace.core</groupId>
     <artifactId>core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.3.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 </project>
