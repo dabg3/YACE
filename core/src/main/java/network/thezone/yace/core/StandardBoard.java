@@ -9,7 +9,7 @@ import static network.thezone.yace.core.Square.File.*;
 class StandardBoard implements Board {
 
 
-    //redundant map
+    //redundant map for performance
     private Map<Square, Piece> pieces;
 
     private long[] positionsByPiece = new long[Piece.values().length];
@@ -17,23 +17,31 @@ class StandardBoard implements Board {
     private long occupiedSquares;
 
     StandardBoard(Map<Square, Piece> piecePositions) {
+        this.pieces = piecePositions;
+        pieces.forEach(this::initRelated);
+    }
 
+    private void initRelated(Square square, Piece piece) {
+        long pieceBitboard = 1L << SquareMapper.squareToIndex(square);
+        positionsByPiece[piece.ordinal()] |= pieceBitboard;
+        positionsBySide[piece.side.ordinal()] |= pieceBitboard;
+        occupiedSquares |= pieceBitboard;
     }
 
     @Override
     public Piece pieceOn(Square square) {
-        long squareSet = 1L << SquareMapper.squareToIndex(square);
-        for (Piece.Type piece : Piece.Type.values()) {
-            if ((positionsByPiece[piece.index] & squareSet) > 1)
-                return piece;
-        }
-        return null;
+        return pieces.get(square);
     }
 
     @Override
-    public Set<Piece> listPiecesLeft() {
-        return null;
+    public void move(Square from, Square to) {
+        Piece pieceMoving = pieces.get(from);
+        Piece targetPiece = pieces.get(to);
+        if (targetPiece == null)
+            makeQuietMove(pieceMoving, from, to);
     }
+
+
 
     private static class SquareMapper {
 
@@ -70,6 +78,10 @@ class StandardBoard implements Board {
         };
 
         // Big-Endian Files (file A...H -> fileIndex 7...0)
+        /* using a Map because File entries order matters, initialization of
+         * array indexes at runtime by file.ordinal() would require several lines:
+         * FILE_TO_INDEX[A.ordinal()] = 7
+         */
         private static final Map<Square.File, Integer> FILE_TO_INDEX = Map.of(
                 A, 7, B, 6, C, 5, D, 4, E, 3, F, 2, G, 1, H, 0
         );
