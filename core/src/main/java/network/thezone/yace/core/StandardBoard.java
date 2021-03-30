@@ -6,8 +6,34 @@ import java.util.Set;
 import static network.thezone.yace.core.Square.*;
 import static network.thezone.yace.core.Square.File.*;
 
-class BitboardImp extends Board {
+class StandardBoard implements Board {
 
+
+    //redundant map
+    private Map<Square, Piece> pieces;
+
+    private long[] positionsByPiece = new long[Piece.values().length];
+    private long[] positionsBySide = new long[Side.values().length];
+    private long occupiedSquares;
+
+    StandardBoard(Map<Square, Piece> piecePositions) {
+
+    }
+
+    @Override
+    public Piece pieceOn(Square square) {
+        long squareSet = 1L << SquareMapper.squareToIndex(square);
+        for (Piece.Type piece : Piece.Type.values()) {
+            if ((positionsByPiece[piece.index] & squareSet) > 1)
+                return piece;
+        }
+        return null;
+    }
+
+    @Override
+    public Set<Piece> listPiecesLeft() {
+        return null;
+    }
 
     private static class SquareMapper {
 
@@ -54,7 +80,15 @@ class BitboardImp extends Board {
 
         // LSR bitIndex = 8 * fileIndex + rankIndex
         static int squareToIndex(Square square) {
-            return 8 * FILE_TO_INDEX.get(square.file) + RANK_TO_INDEX[square.rank];
+            return CoordinatesToIndex(square.file, square.rank);
+        }
+
+        private static int CoordinatesToIndex(File file, int rank) {
+            return 8 * FILE_TO_INDEX.get(file) + RANK_TO_INDEX[rank];
+        }
+
+        static Square CoordinatesToSquare(File file, int rank) {
+            return INDEX_TO_SQUARE[CoordinatesToIndex(file, rank)];
         }
     }
 

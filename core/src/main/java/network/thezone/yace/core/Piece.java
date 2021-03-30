@@ -1,18 +1,22 @@
 package network.thezone.yace.core;
 
-import java.util.Set;
+public enum PieceType {
 
-public abstract class Piece {
+    //starting from A file, proceeding rank wise.
 
-    protected PieceType type;
+    enum Type {
+        ROOK(0),
+        KNIGHT(1),
+        BISHOP(2),
+        QUEEN(3),
+        KING(4),
+        PAWN(5);
 
-    Piece(PieceType type) {
-        this.type = type;
+        final int index;
+
+        Type(int index) {
+            this.index = index;
+        }
     }
-
-    abstract Move calculateMove(long from, long to, long occupiedSquares);
-
-    abstract Set<Move> calculateAllMoves(long from, long occupiedSquare);
-
 
 }
