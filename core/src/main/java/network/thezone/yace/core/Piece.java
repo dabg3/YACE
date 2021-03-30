@@ -1,17 +1,18 @@
 package network.thezone.yace.core;
 
-public enum Piece {
+import java.util.Set;
 
-    //starting from A file, proceeding rank wise.
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
-    KING,
-    PAWN;
+public abstract class Piece {
 
-    /*
-     * It would be better to have different entries for black and white pieces?
-     * Postponing this question...
-     */
+    protected PieceType type;
+
+    Piece(PieceType type) {
+        this.type = type;
+    }
+
+    abstract Move calculateMove(long from, long to, long occupiedSquares);
+
+    abstract Set<Move> calculateAllMoves(long from, long occupiedSquare);
+
+
 }

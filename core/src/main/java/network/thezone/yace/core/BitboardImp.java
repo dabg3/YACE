@@ -6,37 +6,8 @@ import java.util.Set;
 import static network.thezone.yace.core.Square.*;
 import static network.thezone.yace.core.Square.File.*;
 
-class BitboardImp implements Board {
+class BitboardImp extends Board {
 
-    @Override
-    public boolean isSquareOccupied(Square square) {
-        return false;
-    }
-
-    @Override
-    public boolean isRangeFree(Square from, Square to) {
-        return false;
-    }
-
-    @Override
-    public Piece getPieceOn(Square square) {
-        return null;
-    }
-
-    @Override
-    public Set<Square> getSquaresOccupiedBy(Side side, Piece piece) {
-        return null;
-    }
-
-    @Override
-    public void place(Side side, Piece piece, Square square) {
-
-    }
-
-    @Override
-    public void free(Square square) {
-
-    }
 
     private static class SquareMapper {
 
