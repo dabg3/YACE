@@ -1,6 +1,6 @@
-package network.thezone.yace.core;
+package network.thezone.yace.core.bitmap;
 
-import static network.thezone.yace.core.Square.File.*;
+import static network.thezone.yace.core.bitmap.Square.File.*;
 
 public enum Square {
 
@@ -20,12 +20,12 @@ public enum Square {
     H1(H, 1), H2(H, 2), H3(H, 3), H4(H, 4), H5(H, 5), H6(H, 6), H7(H, 7), H8(H, 8);
 
 
-    enum File {
-        A, B, C, D, E, F, G, H
+    public enum File {
+        A, B, C, D, E, F, G, H;
     }
 
-    final File file;
-    final int rank;
+    public final File file;
+    public final int rank;
 
     Square(File file, int rank) {
         this.file = file;
