@@ -4,7 +4,7 @@ import java.util.Map;
 
 import static network.thezone.yace.core.Square.File.*;
 
-final class InternalSquareMap extends SquareMapper {
+final class InternalSquareMap extends BitboardSquareMapper {
 
     /*
      * A8 = 63
@@ -38,7 +38,7 @@ final class InternalSquareMap extends SquareMapper {
 
     // LSR bitIndex = 8 * fileIndex + rankIndex
     @Override
-    public int toIndex(Square square) {
+    protected int toIndex(Square square) {
         return 8 * FILE_TO_INDEX.get(square.file) + RANK_TO_INDEX[square.rank];
     }
 
