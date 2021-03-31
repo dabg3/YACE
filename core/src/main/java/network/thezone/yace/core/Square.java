@@ -1,12 +1,11 @@
-package network.thezone.yace.core.bitmap;
+package network.thezone.yace.core;
 
-import static network.thezone.yace.core.bitmap.Square.File.*;
+import static network.thezone.yace.core.Square.File.*;
 
 public enum Square {
 
     /*
-     * Placement doesn't matter, square to index mapping is made
-     * by the class which encapsulates the board representation.
+     * Placement doesn't matter, square to index mapping is made by SquareMapper
      * The following entries are just a means of communication between objs
      */
 
