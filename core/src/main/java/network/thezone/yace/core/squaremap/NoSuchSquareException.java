@@ -1,4 +1,4 @@
-package network.thezone.yace.core.exceptions;
+package network.thezone.yace.core.squaremap;
 
 public class NoSuchSquareException extends RuntimeException {
 

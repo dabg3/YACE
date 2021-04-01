@@ -1,7 +1,6 @@
-package network.thezone.yace.core;
+package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.exceptions.NoSuchSquareException;
-import network.thezone.yace.core.exceptions.UnmappableBitboardException;
+import network.thezone.yace.core.Square;
 
 public abstract class SquareMapper {
 
@@ -18,17 +17,6 @@ public abstract class SquareMapper {
         if (index < 0 || index >= indexToSquare.length)
             throw new NoSuchSquareException(String.format("index %d cannot be mapped", index));
         return indexToSquare[index];
-    }
-
-    long toBitboard(Square square) {
-        return 1L << toIndex(square);
-    }
-
-    Square fromBitboard(long bitboard) {
-        if (Long.bitCount(bitboard) > 1)
-            throw new UnmappableBitboardException("Too many bit set");
-        int bitIndex = Long.numberOfTrailingZeros(bitboard);
-        return fromIndex(bitIndex);
     }
 
 }
