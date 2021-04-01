@@ -4,7 +4,7 @@ import java.util.Map;
 
 import static network.thezone.yace.core.Square.File.*;
 
-final class InternalSquareMap extends BitboardSquareMapper {
+final class InternalSquareMap extends SquareMapper {
 
     /*
      * A8 = 63

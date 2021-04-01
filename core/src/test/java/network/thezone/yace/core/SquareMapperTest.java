@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 
 public class SquareMapperTest {
 
+    private static long A8_BITBOARD = 0b10000000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
+
     SquareMapper MAPPER = new InternalSquareMap();
 
     @Test
@@ -29,6 +31,16 @@ public class SquareMapperTest {
     @Test(expectedExceptions = NoSuchSquareException.class)
     public void fromIndex_indexLessThan0_exception() {
         MAPPER.fromIndex(-1);
+    }
+
+    @Test
+    public void toBitboard_anySquare() {
+        assert A8_BITBOARD == MAPPER.toBitboard(Square.A8);
+    }
+
+    @Test
+    public void fromBitboard_anyValidBitboard() {
+        assert Square.A8 == MAPPER.fromBitboard(A8_BITBOARD);
     }
 
 }
