@@ -1,11 +1,6 @@
 package network.thezone.yace.core.squaremap;
 
 import network.thezone.yace.core.Square;
-import network.thezone.yace.core.squaremap.SquareMapper;
-
-import java.util.Map;
-
-import static network.thezone.yace.core.Square.File.*;
 
 final class InternalSquareMap extends SquareMapper {
 
@@ -27,22 +22,18 @@ final class InternalSquareMap extends SquareMapper {
 
     // Little-Endian Ranks (rank 1...8 -> rankIndex 0...7)
     private static final int[] RANK_TO_INDEX = {
-            0, 0, 1, 2, 3, 4, 5, 6, 7
+            0, 1, 2, 3, 4, 5, 6, 7
     };
 
     // Big-Endian Files (file A...H -> fileIndex 7...0)
-    /* using a Map because File entries order matters, initialization of
-     * array indexes at runtime by file.ordinal() would require several LOC:
-     * FILE_TO_INDEX[A.ordinal()] = 7
-     */
-    private static final Map<Square.File, Integer> FILE_TO_INDEX = Map.of(
-            A, 7, B, 6, C, 5, D, 4, E, 3, F, 2, G, 1, H, 0
-    );
+    private static final int[] FILE_TO_INDEX = {
+            7, 6, 5, 4, 3, 2, 1, 0
+    };
 
     // LSR bitIndex = 8 * fileIndex + rankIndex
     @Override
     protected int toIndex(Square square) {
-        return 8 * FILE_TO_INDEX.get(square.file) + RANK_TO_INDEX[square.rank];
+        return 8 * FILE_TO_INDEX[square.file.naturalIndex - 1] + RANK_TO_INDEX[square.rankNaturalIndex - 1];
     }
 
 }

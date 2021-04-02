@@ -20,15 +20,21 @@ public enum Square {
 
 
     public enum File {
-        A, B, C, D, E, F, G, H;
+        A(1), B(2), C(3), D(4), E(5), F(6), G(7), H(8);
+
+        public final int naturalIndex;
+
+        File(int naturalIndex) {
+            this.naturalIndex = naturalIndex;
+        }
     }
 
     public final File file;
-    public final int rank;
+    public final int rankNaturalIndex;
 
-    Square(File file, int rank) {
+    Square(File file, int rankNaturalIndex) {
         this.file = file;
-        this.rank = rank;
+        this.rankNaturalIndex = rankNaturalIndex;
     }
 
 }
