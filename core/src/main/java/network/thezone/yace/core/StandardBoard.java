@@ -1,5 +1,7 @@
 package network.thezone.yace.core;
 
+import network.thezone.yace.core.squaremap.Bitboards;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +15,6 @@ class StandardBoard implements Board {
     private long[] positionsBySide = new long[Side.values().length];
     private long occupiedSquares;
 
-    private BitboardSquareMapper squareMap = new InternalSquareMap();
-
 
     private StandardBoard(Map<Square, Piece> piecePositions) {
         this.pieces = piecePositions;
@@ -22,7 +22,7 @@ class StandardBoard implements Board {
     }
 
     private void initRelated(Square square, Piece piece) {
-        long pieceBitboard = 1L << squareMap.toIndex(square);
+        long pieceBitboard = Bitboards.parse(square);
         positionsByPiece[piece.ordinal()] |= pieceBitboard;
         positionsBySide[piece.side.ordinal()] |= pieceBitboard;
         occupiedSquares |= pieceBitboard;
@@ -37,8 +37,9 @@ class StandardBoard implements Board {
     public void move(Square from, Square to) {
         Piece pieceMoving = pieces.get(from);
         Piece targetPiece = pieces.get(to);
-        if (targetPiece == null){}
-            //makeQuietMove(pieceMoving, from, to);
+        if (targetPiece == null) {
+        }
+        //makeQuietMove(pieceMoving, from, to);
     }
 
     @Override
