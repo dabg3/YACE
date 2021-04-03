@@ -33,7 +33,7 @@ final class InternalSquareMap extends SquareMapper {
     // LSR bitIndex = 8 * fileIndex + rankIndex
     @Override
     protected int toIndex(Square square) {
-        return 8 * FILE_TO_INDEX[square.file.naturalIndex - 1] + RANK_TO_INDEX[square.rankNaturalIndex - 1];
+        return 8 * FILE_TO_INDEX[square.fileNaturalIndex - 1] + RANK_TO_INDEX[square.rankNaturalIndex - 1];
     }
 
 }
