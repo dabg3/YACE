@@ -12,7 +12,7 @@ public class Bitboards {
 
     public static Square toSquare(long bitboard) {
         if (Long.bitCount(bitboard) > 1)
-            throw new UnmappableBitboardException("Too many bit set");
+            throw new UnmappableBitboardException("Too many bits set");
         int bitIndex = Long.numberOfTrailingZeros(bitboard);
         return MAPPER.fromIndex(bitIndex);
     }
