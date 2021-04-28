@@ -1,7 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.Square;
-import network.thezone.yace.core.squaremap.IterableSquareMapper;
 import org.testng.annotations.Test;
 
 import java.util.Iterator;

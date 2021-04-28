@@ -1,4 +1,7 @@
-package network.thezone.yace.core;
+package network.thezone.yace.core.squaremap;
+
+import network.thezone.yace.core.squaremap.InternalSquareMap;
+import network.thezone.yace.core.squaremap.SquareMapper;
 
 public enum Square {
 
@@ -6,6 +9,7 @@ public enum Square {
      * Placement doesn't matter, square to index mapping is made by SquareMapper
      * The following entries are just a means of communication between objs
      */
+
 
     A1(1, 1), A2(1, 2), A3(1, 3), A4(1, 4), A5(1, 5), A6(1, 6), A7(1, 7), A8(1, 8),
     B1(2, 1), B2(2, 2), B3(2, 3), B4(2, 4), B5(2, 5), B6(2, 6), B7(2, 7), B8(2, 8),
@@ -16,6 +20,7 @@ public enum Square {
     G1(7, 1), G2(7, 2), G3(7, 3), G4(7, 4), G5(7, 5), G6(7, 6), G7(7, 7), G8(7, 8),
     H1(8, 1), H2(8, 2), H3(8, 3), H4(8, 4), H5(8, 5), H6(8, 6), H7(8, 7), H8(8, 8);
 
+    private static final SquareMapper MAPPER = new InternalSquareMap();
 
     public final int fileNaturalIndex;
     public final int rankNaturalIndex;
@@ -23,6 +28,17 @@ public enum Square {
     Square(int fileNaturalIndex, int rankNaturalIndex) {
         this.fileNaturalIndex = fileNaturalIndex;
         this.rankNaturalIndex = rankNaturalIndex;
+    }
+
+    public long toBitboard() {
+        return 1L << MAPPER.toIndex(this);
+    }
+
+    public static Square parse(long bitboard) {
+        if (Long.bitCount(bitboard) > 1)
+            throw new UnmappableBitboardException("Too many bits set");
+        int bitIndex = Long.numberOfTrailingZeros(bitboard);
+        return MAPPER.fromIndex(bitIndex);
     }
 
 }

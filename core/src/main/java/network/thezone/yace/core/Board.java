@@ -5,6 +5,8 @@ package network.thezone.yace.core;
  * implementation whether it is piece-centric or square-centric or both...
  */
 
+import network.thezone.yace.core.squaremap.Square;
+
 interface Board {
 
     Piece pieceOn(Square square);

@@ -1,6 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.Square;
 import org.testng.annotations.Test;
 
 public class SquareMapperTest {

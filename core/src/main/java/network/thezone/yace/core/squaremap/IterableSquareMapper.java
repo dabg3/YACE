@@ -1,7 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.Square;
-
 import java.util.Iterator;
 
 public abstract class IterableSquareMapper extends SquareMapper {

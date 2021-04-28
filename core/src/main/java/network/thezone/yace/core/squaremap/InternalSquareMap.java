@@ -1,7 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.Square;
-
 final class InternalSquareMap extends SquareMapper {
 
     /*

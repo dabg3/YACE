@@ -1,7 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.Square;
-
 public abstract class SquareMapper {
 
     protected final Square[] indexToSquare = new Square[Square.values().length];
