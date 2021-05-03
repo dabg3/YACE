@@ -7,6 +7,8 @@ class DirectionsCalculator {
 
     private static final SquareMapper MAPPER = Square.getMapper();
 
+    private DirectionsCalculator(){}
+
     /* White movements */
 
     static int whiteForward() {

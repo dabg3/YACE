@@ -4,7 +4,12 @@ import org.testng.annotations.Test;
 
 public class SquareTest {
 
-    private static final long A8_BITBOARD = 0b10000000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
+    /* A8_BITBOARD refers to A8 square index as mapped by InternalSquareMap.
+     * Changing mapping could lead tests to fail, gotta work on this
+     */
+    private static final long A8_BITBOARD =
+            0b10000000_00000000_00000000_00000000_00000000_00000000_00000000_00000000L;
+
     private static final long UNMAPPABLE_BITBOARD = 3L;
 
     @Test
