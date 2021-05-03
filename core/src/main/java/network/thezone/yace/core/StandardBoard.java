@@ -12,7 +12,7 @@ class StandardBoard implements Board {
     private Map<Square, Piece> pieces;
 
     private long[] positionsByPiece = new long[Piece.values().length];
-    private long[] positionsBySide = new long[Side.values().length];
+    private long[] positionsBySide = new long[Color.values().length];
     private long occupiedSquares;
 
 
@@ -24,7 +24,7 @@ class StandardBoard implements Board {
     private void initRelated(Square square, Piece piece) {
         long pieceBitboard = square.toBitboard();
         positionsByPiece[piece.ordinal()] |= pieceBitboard;
-        positionsBySide[piece.side.ordinal()] |= pieceBitboard;
+        positionsBySide[piece.color.ordinal()] |= pieceBitboard;
         occupiedSquares |= pieceBitboard;
     }
 

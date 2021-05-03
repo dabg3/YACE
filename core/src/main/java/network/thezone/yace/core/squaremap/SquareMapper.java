@@ -9,9 +9,9 @@ public abstract class SquareMapper {
             indexToSquare[toIndex(square)] = square;
     }
 
-    protected abstract int toIndex(Square square);
+    public abstract int toIndex(Square square);
 
-    protected Square fromIndex(int index) {
+    public Square fromIndex(int index) {
         if (index < 0 || index >= indexToSquare.length)
             throw new NoSuchSquareException(String.format("index %d cannot be mapped", index));
         return indexToSquare[index];

@@ -10,7 +10,7 @@ public class IterableSquareMapperTest {
     public void iteratorEndCheck() {
         IterableSquareMapper mapper = new IterableSquareMapper() {
             @Override
-            protected int toIndex(Square square) {
+            public int toIndex(Square square) {
                 return 63;
             }
         };

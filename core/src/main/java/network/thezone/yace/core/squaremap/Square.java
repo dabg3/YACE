@@ -1,8 +1,5 @@
 package network.thezone.yace.core.squaremap;
 
-import network.thezone.yace.core.squaremap.InternalSquareMap;
-import network.thezone.yace.core.squaremap.SquareMapper;
-
 public enum Square {
 
     /*
@@ -34,11 +31,16 @@ public enum Square {
         return 1L << MAPPER.toIndex(this);
     }
 
-    public static Square parse(long bitboard) {
+    public static Square valueOf(long bitboard) {
         if (Long.bitCount(bitboard) > 1)
             throw new UnmappableBitboardException("Too many bits set");
         int bitIndex = Long.numberOfTrailingZeros(bitboard);
         return MAPPER.fromIndex(bitIndex);
+    }
+
+    /* public runtime access to in-use mapper */
+    public static SquareMapper getMapper() {
+        return MAPPER;
     }
 
 }

@@ -1,7 +1,7 @@
 package network.thezone.yace.core;
 
 import static network.thezone.yace.core.Piece.Type.*;
-import static network.thezone.yace.core.Side.*;
+import static network.thezone.yace.core.Color.*;
 
 public enum Piece {
 
@@ -19,11 +19,11 @@ public enum Piece {
     BLACK_QUEEN(BLACK, QUEEN),
     BLACK_KING(BLACK, KING);
 
-    final Side side;
+    final Color color;
     final Type type;
 
-    Piece(Side side, Type type) {
-        this.side = side;
+    Piece(Color color, Type type) {
+        this.color = color;
         this.type = type;
     }
 

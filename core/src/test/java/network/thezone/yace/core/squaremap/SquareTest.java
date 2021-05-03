@@ -14,11 +14,11 @@ public class SquareTest {
 
     @Test
     public void fromBitboard_anyValidBitboard() {
-        assert Square.A8 == Square.parse(A8_BITBOARD);
+        assert Square.A8 == Square.valueOf(A8_BITBOARD);
     }
 
     @Test(expectedExceptions = UnmappableBitboardException.class)
     public void fromBitboard_invalidBitboard_exception() {
-        Square.parse(UNMAPPABLE_BITBOARD);
+        Square.valueOf(UNMAPPABLE_BITBOARD);
     }
 }

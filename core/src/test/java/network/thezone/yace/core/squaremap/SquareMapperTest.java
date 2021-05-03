@@ -6,7 +6,7 @@ public class SquareMapperTest {
 
     private static final SquareMapper MAPPER = new SquareMapper() {
         @Override
-        protected int toIndex(Square square) {
+        public int toIndex(Square square) {
             return 63;
         }
     };
