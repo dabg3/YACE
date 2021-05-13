@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class InternalSquareMapTest {
 
-    private static final SquareMapper MAPPER = new InternalSquareMap();
+    private static final SquareMapper MAPPER = InternalSquareMap.instance();
 
     @Test
     public void mapper_internalMapping_msbA8lsbH1FileRank() {

@@ -21,6 +21,9 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
                     </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/mocked_mapper_suite.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>

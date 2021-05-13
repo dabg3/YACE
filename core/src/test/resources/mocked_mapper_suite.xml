@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="mocked_mapper_suite">
+    <test name="sample">
+        <classes>
+            <class name="network.thezone.yace.core.movements.DirectionTest"/>
+        </classes>
+    </test>
+</suite>
