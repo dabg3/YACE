@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="default_suite">
+    <test name="default_tests">
+        <classes>
+            <class name="network.thezone.yace.core.squaremap.InternalSquareMapTest"/>
+        </classes>
+    </test>
+</suite>

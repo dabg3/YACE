@@ -23,6 +23,7 @@
                     </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/mocked_mapper_suite.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/default_suite.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

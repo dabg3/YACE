@@ -1,7 +1,10 @@
 package network.thezone.yace.core.movements;
 
+import mockit.MockUp;
 import network.thezone.yace.core.Color;
 import network.thezone.yace.core.squaremap.FakeInternalSquareMap;
+import network.thezone.yace.core.squaremap.SquareMapper;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -24,13 +27,14 @@ public class DirectionTest {
     private static final int NORTH_WEST = 7;
 
 
+    //this should be on test setup class
     @BeforeSuite
     public void setupMock() {
-       new FakeInternalSquareMap();
     }
 
     @Test
     public void moveDirection() {
+        new FakeInternalSquareMap();
         long startingPos = 1;
         long expectedPos = 1 << NORTH_EAST;
         assert Direction.RIGHT_FORWARD.move(startingPos, Color.WHITE) == expectedPos;

@@ -18,10 +18,9 @@ public class TestSquareMap extends SquareMapper {
      * NW   +7
      */
 
+
     TestSquareMap() {
     }
-
-
 
     // Little-Endian Ranks (rank 1...8 -> rankIndex 0...7)
     private static final int[] RANK_TO_INDEX = {
@@ -38,6 +37,5 @@ public class TestSquareMap extends SquareMapper {
     public int toIndex(Square square) {
         return 8 * RANK_TO_INDEX[square.rankNaturalIndex - 1] + FILE_TO_INDEX[square.fileNaturalIndex - 1];
     }
-
 
 }
