@@ -1,8 +1,7 @@
 package network.thezone.yace.core.movements;
 
 import network.thezone.yace.core.Color;
-import network.thezone.yace.core.squaremap.Square;
-import network.thezone.yace.core.squaremap.SquareMapper;
+import network.thezone.yace.core.Square;
 
 
 public enum Direction {
@@ -27,8 +26,8 @@ public enum Direction {
     }
 
     private int calculateMovementValue(Square from, Square to) {
-        SquareMapper mapper = Square.getMapper();
-        return mapper.toIndex(to) - mapper.toIndex(from);
+        //return mapper.toIndex(to) - mapper.toIndex(from);
+        return 0;
     }
 
     public long move(Long bitboard, Color color) {

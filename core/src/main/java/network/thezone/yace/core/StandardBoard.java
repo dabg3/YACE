@@ -1,7 +1,5 @@
 package network.thezone.yace.core;
 
-import network.thezone.yace.core.squaremap.Square;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +20,7 @@ class StandardBoard implements Board {
     }
 
     private void initRelated(Square square, Piece piece) {
-        long pieceBitboard = square.toBitboard();
+        long pieceBitboard = 0; //square.toBitboard();
         positionsByPiece[piece.ordinal()] |= pieceBitboard;
         positionsBySide[piece.color.ordinal()] |= pieceBitboard;
         occupiedSquares |= pieceBitboard;
