@@ -34,7 +34,7 @@ class Mapping implements Mappable {
     @Override
     public Square squareAt(int index) {
         if (index < 0 || index >= INDEX_TO_SQUARE.length)
-            throw new NoSuchSquareException(String.format("index %d cannot be mapped", index));
+            throw new IllegalArgumentException(String.format("index %d cannot be mapped", index));
         return INDEX_TO_SQUARE[index];
     }
 
