@@ -7,8 +7,8 @@ package network.thezone.yace.core;
 
 interface Board {
 
-    Piece pieceOn(Square square);
+    PieceID pieceOn(Square square);
     void move(Square from, Square to);
     void undoMove();
-    void placePiece(Piece piece, Square square);
+    void placePiece(PieceID pieceID, Square square);
 }

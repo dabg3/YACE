@@ -1,21 +1,19 @@
 package network.thezone.yace.translation;
 
 import network.thezone.yace.core.Color;
-import network.thezone.yace.core.Piece;
+import network.thezone.yace.core.PieceID;
 import network.thezone.yace.core.Square;
 import network.thezone.yace.core.squaremap.Mappable;
 import network.thezone.yace.core.squaremap.MappingBuilder;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class FenParser {
 
     private static final Mappable FEN_MAPPING = new MappingBuilder()
-            .bigEndianFiles()
-            .littleEndianRanks()
+            .littleEndianFiles()
+            .bigEndianRanks()
             .leastSignificantFileOrdering()
             .build();
 
@@ -26,51 +24,71 @@ public class FenParser {
     private static final int HALFMOVE_CLOCK = 4;
     private static final int FULLMOVE_COUNTER = 5;
 
-    private Map<Square, Piece> piecePlacement = new HashMap<>();
-    private Color sideToMove;
-    private boolean[] castlingAbility = new boolean[Color.MAX_ALLOWED];
-    private Set<Square> enPassantTargetSquares = new HashSet<>();
-    private int halfmoveClock;
-    private int fullmoveCounter;
+    private static final int ASCII_DIGIT_0 = 48;
 
     public void parsePosition(String fenString) {
         String[] fields = fenString.split(" ");
         parsePiecePlacement(fields[PIECE_PLACEMENT]);
         parseSideToMove(fields[SIDE_TO_MOVE]);
+        parseCastlingAbility(fields[CASTLING_ABILITY]);
     }
 
-    private void parsePiecePlacement(String placement) {
-
-    }
-
-    private void parseSideToMove(String side) {
-        if (side.equalsIgnoreCase("w"))
-            sideToMove = Color.WHITE;
-        else
-            sideToMove = Color.BLACK;
-    }
-
-    public Map<Square, Piece> getPiecePlacement() {
+    private Map<Square, PieceID> parsePiecePlacement(String placement) {
+        Map<Square, PieceID> piecePlacement = new HashMap<>();
+        String[] rows = placement.split("/");
+        int squareIndex = 0;
+        for (String row : rows) {
+            char[] elements = row.toCharArray();
+            for (char element : elements) {
+                if (Character.isDigit(element))
+                    squareIndex += element - ASCII_DIGIT_0;
+                else {
+                    Square occupiedSquare = FEN_MAPPING.squareAt(squareIndex++);
+                    PieceID placedPiece = toPiece(element);
+                    piecePlacement.put(occupiedSquare, placedPiece);
+                }
+            }
+        }
         return piecePlacement;
     }
 
-    public Color getSideToMove() {
-        return sideToMove;
+    private PieceID toPiece(char piece) {
+        switch (piece) {
+            case 'r':
+                return PieceID.BLACK_ROOK;
+            case 'n':
+                return PieceID.BLACK_KNIGHT;
+            case 'b':
+                return PieceID.BLACK_BISHOP;
+            case 'q':
+                return PieceID.BLACK_QUEEN;
+            case 'k':
+                return PieceID.BLACK_KING;
+            case 'p':
+                return PieceID.BLACK_PAWN;
+            case 'R':
+                return PieceID.WHITE_ROOK;
+            case 'N':
+                return PieceID.WHITE_KNIGHT;
+            case 'B':
+                return PieceID.WHITE_BISHOP;
+            case 'Q':
+                return PieceID.WHITE_QUEEN;
+            case 'K':
+                return PieceID.WHITE_KING;
+            case 'P':
+                return PieceID.WHITE_PAWN;
+            default:
+                throw new IllegalArgumentException(String.format("No such piece: %c", piece));
+        }
     }
 
-    public boolean[] getCastlingAbility() {
-        return castlingAbility;
+    private Color parseSideToMove(String side) {
+        return side.equalsIgnoreCase("w") ? Color.WHITE : Color.BLACK;
     }
 
-    public Set<Square> getEnPassantTargetSquares() {
-        return enPassantTargetSquares;
+    private void parseCastlingAbility(String castling) {
+
     }
 
-    public int getHalfmoveClock() {
-        return halfmoveClock;
-    }
-
-    public int getFullmoveCounter() {
-        return fullmoveCounter;
-    }
 }
