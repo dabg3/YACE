@@ -27,23 +27,18 @@ public enum PieceID {
         this.type = type;
     }
 
-    public enum Type {
-        ROOK,
+    enum Type {
+        ROOK((Horizontal::slidingMove).combine(Vertical::slidingMove)),
         KNIGHT,
         BISHOP,
         QUEEN,
         KING,
         PAWN;
 
-        private Movable instance;
+        Type(Validator validator) {
 
-        Movable getInstance() {
-            return instance;
         }
 
-        void setInstance(Movable instance) {
-            this.instance = instance;
-        }
     }
 
 
