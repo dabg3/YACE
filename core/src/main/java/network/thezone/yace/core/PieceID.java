@@ -1,9 +1,10 @@
 package network.thezone.yace.core;
 
-import static network.thezone.yace.core.Piece.Type.*;
-import static network.thezone.yace.core.Color.*;
+import static network.thezone.yace.core.Color.BLACK;
+import static network.thezone.yace.core.Color.WHITE;
+import static network.thezone.yace.core.PieceID.Type.*;
 
-public enum Piece {
+public enum PieceID {
 
     //starting from A file, proceeding rank wise.
     WHITE_ROOK(WHITE, ROOK),
@@ -22,7 +23,7 @@ public enum Piece {
     final Color color;
     final Type type;
 
-    Piece(Color color, Type type) {
+    PieceID(Color color, Type type) {
         this.color = color;
         this.type = type;
     }
@@ -34,7 +35,6 @@ public enum Piece {
         QUEEN,
         KING,
         PAWN;
-
     }
 }
 

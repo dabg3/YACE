@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="mocked_mapper_suite">
-    <test name="mocked_mapper_tests">
-        <classes>
-            <class name="network.thezone.yace.core.movements.DirectionTest"/>
-            <class name="network.thezone.yace.core.squaremap.SquareTest"/>
-        </classes>
-    </test>
-</suite>

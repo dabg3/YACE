@@ -17,6 +17,7 @@
 
     <modules>
         <module>core</module>
+        <module>translation</module>
     </modules>
 
     <build>
