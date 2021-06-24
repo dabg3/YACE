@@ -8,14 +8,14 @@ class Mapping implements Mappable {
 
     private final int[] FILE_INDEXES;
     private final int[] RANK_INDEXES;
-    private final IntBinaryOperator mappingCalculator;
+    private final IntBinaryOperator mappingCalculation;
 
     private final Square[] INDEX_TO_SQUARE = new Square[Square.values().length];
 
-    Mapping(int[] RANK_INDEXES, int[] FILE_INDEXES, IntBinaryOperator mappingCalculator) {
+    Mapping(int[] RANK_INDEXES, int[] FILE_INDEXES, IntBinaryOperator mappingCalculation) {
         this.RANK_INDEXES = RANK_INDEXES;
         this.FILE_INDEXES = FILE_INDEXES;
-        this.mappingCalculator = mappingCalculator;
+        this.mappingCalculation = mappingCalculation;
         bindSquareToIndex();
     }
 
@@ -28,7 +28,7 @@ class Mapping implements Mappable {
     public int toIndex(Square square) {
         int fileIndex = FILE_INDEXES[square.fileNaturalIndex - 1];
         int rankIndex = RANK_INDEXES[square.rankNaturalIndex - 1];
-        return mappingCalculator.applyAsInt(fileIndex, rankIndex);
+        return mappingCalculation.applyAsInt(fileIndex, rankIndex);
     }
 
     @Override

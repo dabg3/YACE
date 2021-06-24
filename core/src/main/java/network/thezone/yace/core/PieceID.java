@@ -1,7 +1,8 @@
 package network.thezone.yace.core;
 
+import static network.thezone.yace.core.Color.BLACK;
+import static network.thezone.yace.core.Color.WHITE;
 import static network.thezone.yace.core.PieceID.Type.*;
-import static network.thezone.yace.core.Color.*;
 
 public enum PieceID {
 
@@ -28,20 +29,13 @@ public enum PieceID {
     }
 
     enum Type {
-        ROOK((Horizontal::slidingMove).combine(Vertical::slidingMove)),
+        ROOK,
         KNIGHT,
         BISHOP,
         QUEEN,
         KING,
         PAWN;
-
-        Type(Validator validator) {
-
-        }
-
     }
-
-
 }
 
 

@@ -27,7 +27,43 @@ captureValidator.validate(b1, c3) //still talks with Board through mediator
 ...doesn't work because a validator should be indipendent from inner objs state. It cannot communicate through a mediator but it has to accept Board instance as argument
 .validate(b1, c3, Board)
 
-### Inside validator
+...the solution may be going functional with pipelines.
+
+### pipeline steps
+
+Where do I validate special moves like en passant and castling? 
+1. Inside validMovement : moveEvaluator also placed inside SMELLS BAD
+2. on its own pipeline step : requires special moveEvaluator(quiet move or capture) per piece. THIS SEEMS BETTER!!!
+
+each piece has its own moveEvaluator, a generic one for most pieces (a capture is recognized whether a piece occupies the target square) or special for pawns and king
+
+```Java
+class Piece {
+	movementValidator(Move, Position) returns boolean
+	moveCategorizator(Move, Position) returns CategorizedMove
+	moveExecutor(CategorizedMove, Position) returns Position //returns a new position without altering current 
+}
+
+class Move {
+	Square from
+	Square to
+}
+
+class CategorizedMove extends Move{
+	MoveType type { Quiet, Capture, EnPassant, Castling }
+}
+```
+How do I retrieve the instance of Piece containing moveValidator and moveEvaluator??? (and moveExecutor may require the same treatment)
+
+.require(validMovement) 
+.require(noCheckAfter)
+.require(validMove)
+.onValid(moveExecutor) //different types of execution for special moves (castling moves 2 pieces, en-passant has the captured piece on a different square)
+.onFail(() -> false)
+
+### undo moves
+
+Hold previous positions not only single moves. NOT SURE
 
 
 

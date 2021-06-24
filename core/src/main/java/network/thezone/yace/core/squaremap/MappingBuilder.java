@@ -10,7 +10,7 @@ public class MappingBuilder implements Builder {
 
     protected int[] rankIndexes = null;
     protected int[] fileIndexes = null;
-    protected IntBinaryOperator mappingCalculator = null;
+    protected IntBinaryOperator mappingCalculation = null;
 
     @Override
     public Builder bigEndianRanks() {
@@ -38,13 +38,13 @@ public class MappingBuilder implements Builder {
 
     @Override
     public Builder leastSignificantRankOrdering() {
-        mappingCalculator = (fileIndex, rankIndex) -> 8 * fileIndex + rankIndex;
+        mappingCalculation = (fileIndex, rankIndex) -> 8 * fileIndex + rankIndex;
         return this;
     }
 
     @Override
     public Builder leastSignificantFileOrdering() {
-        mappingCalculator = (fileIndex, rankIndex) -> 8 * rankIndex + fileIndex;
+        mappingCalculation = (fileIndex, rankIndex) -> 8 * rankIndex + fileIndex;
         return this;
     }
 
@@ -52,7 +52,7 @@ public class MappingBuilder implements Builder {
     public Mappable build() {
         Objects.requireNonNull(rankIndexes);
         Objects.requireNonNull(fileIndexes);
-        Objects.requireNonNull(mappingCalculator);
-        return new Mapping(rankIndexes, fileIndexes, mappingCalculator);
+        Objects.requireNonNull(mappingCalculation);
+        return new Mapping(rankIndexes, fileIndexes, mappingCalculation);
     }
 }

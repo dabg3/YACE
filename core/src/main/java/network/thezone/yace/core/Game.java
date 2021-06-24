@@ -10,8 +10,6 @@ public class Game {
 
     public void move(Square from, Square to) {
 
-        logicExecutor.execute(movementValidator)
-
     }
 
 }
