@@ -3,7 +3,10 @@ package network.thezone.yace.core.movement;
 import network.thezone.yace.core.Color;
 import network.thezone.yace.core.squaremap.Mappable;
 
-import static network.thezone.yace.core.Square.*;
+import static network.thezone.yace.core.Square.B1;
+import static network.thezone.yace.core.Square.B2;
+import static network.thezone.yace.core.Square.C1;
+import static network.thezone.yace.core.Square.C2;
 
 public enum Direction {
 
@@ -36,4 +39,5 @@ public enum Direction {
             return mapping.toIndex(sampleMove.getTo()) - mapping.toIndex(sampleMove.getFrom());
         }
     }
+
 }

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class DirectionValueTest {
 
     @Test
-    public void valueCalculation_anyMapping_matchMappingCompassRose() {
+    public void movementValuesCalculation_anyMapping_matchMappingCompassRose() {
         Mappable squareMap = new MappingBuilder()
                 .littleEndianFiles()
                 .littleEndianRanks()
@@ -16,10 +16,10 @@ public class DirectionValueTest {
                 .build();
         Direction.Value compassRose = new Direction.Value(squareMap);
 
-        // White movements
+        // White movements value
         int whiteForward = compassRose.evaluate(Direction.FORWARD, Color.WHITE);
         int whiteRightForward = compassRose.evaluate(Direction.RIGHT_FORWARD, Color.WHITE);
-        // Black movements
+        // Black movements value
         int blackForward = compassRose.evaluate(Direction.FORWARD, Color.BLACK);
         int blackRightForward = compassRose.evaluate(Direction.RIGHT_FORWARD, Color.BLACK);
 
