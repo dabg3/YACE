@@ -7,7 +7,7 @@ public class MappingTest {
 
     @Test
     public void mapping_BigEndianFilesLittleEndianRanksLSR_matchSquareIndexes() {
-        Mappable mapping = new MappingBuilder()
+        Mapper mapping = new MappingBuilder()
                 .bigEndianFiles()
                 .littleEndianRanks()
                 .leastSignificantRankOrdering()

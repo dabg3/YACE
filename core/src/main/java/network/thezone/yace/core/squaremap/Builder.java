@@ -8,6 +8,6 @@ public interface Builder {
     Builder littleEndianFiles();
     Builder leastSignificantRankOrdering();
     Builder leastSignificantFileOrdering();
-    Mappable build();
+    Mapper build();
 
 }

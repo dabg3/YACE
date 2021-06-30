@@ -11,48 +11,67 @@ public class MappingBuilder implements Builder {
     protected int[] rankIndexes = null;
     protected int[] fileIndexes = null;
     protected IntBinaryOperator mappingCalculation = null;
+    protected DiagonalsCalculations diagonalsCalculations;
+    protected ReverseMappingCalculations reverseMappingCalculations;
+
+    private void inferDiagonalsCalculations() {
+        if (fileIndexes == null || rankIndexes == null)
+            return;
+        if (fileIndexes == rankIndexes)
+            diagonalsCalculations = DiagonalsCalculations.alignedRanksFiles();
+        else
+            diagonalsCalculations = DiagonalsCalculations.oppositeRanksFiles();
+    }
 
     @Override
     public Builder bigEndianRanks() {
         rankIndexes = BIG_ENDIAN_ORDERING;
+        inferDiagonalsCalculations();
         return this;
     }
 
     @Override
     public Builder littleEndianRanks() {
         rankIndexes = LITTLE_ENDIAN_ORDERING;
+        inferDiagonalsCalculations();
         return this;
     }
 
     @Override
     public Builder bigEndianFiles() {
         fileIndexes = BIG_ENDIAN_ORDERING;
+        inferDiagonalsCalculations();
         return this;
     }
 
     @Override
     public Builder littleEndianFiles() {
         fileIndexes = LITTLE_ENDIAN_ORDERING;
+        inferDiagonalsCalculations();
         return this;
     }
 
     @Override
     public Builder leastSignificantRankOrdering() {
         mappingCalculation = (fileIndex, rankIndex) -> 8 * fileIndex + rankIndex;
+        reverseMappingCalculations = ReverseMappingCalculations.LSROrdering();
         return this;
     }
 
     @Override
     public Builder leastSignificantFileOrdering() {
         mappingCalculation = (fileIndex, rankIndex) -> 8 * rankIndex + fileIndex;
+        reverseMappingCalculations = ReverseMappingCalculations.LSFOrdering();
         return this;
     }
 
     @Override
-    public Mappable build() {
+    public Mapper build() {
         Objects.requireNonNull(rankIndexes);
         Objects.requireNonNull(fileIndexes);
         Objects.requireNonNull(mappingCalculation);
-        return new Mapping(rankIndexes, fileIndexes, mappingCalculation);
+        Objects.requireNonNull(reverseMappingCalculations);
+        Objects.requireNonNull(diagonalsCalculations);
+        return new Mapping(rankIndexes, fileIndexes, mappingCalculation, reverseMappingCalculations, diagonalsCalculations);
     }
 }
