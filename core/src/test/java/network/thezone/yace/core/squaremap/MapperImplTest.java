@@ -3,7 +3,7 @@ package network.thezone.yace.core.squaremap;
 import network.thezone.yace.core.Square;
 import org.junit.jupiter.api.Test;
 
-public class MappingTest {
+public class MapperImplTest {
 
     @Test
     public void mapping_BigEndianFilesLittleEndianRanksLSR_matchSquareIndexes() {

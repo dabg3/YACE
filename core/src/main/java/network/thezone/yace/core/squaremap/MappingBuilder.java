@@ -72,6 +72,6 @@ public class MappingBuilder implements Builder {
         Objects.requireNonNull(mappingCalculation);
         Objects.requireNonNull(reverseMappingCalculations);
         Objects.requireNonNull(diagonalsCalculations);
-        return new Mapping(rankIndexes, fileIndexes, mappingCalculation, reverseMappingCalculations, diagonalsCalculations);
+        return new MapperImpl(rankIndexes, fileIndexes, mappingCalculation, reverseMappingCalculations, diagonalsCalculations);
     }
 }

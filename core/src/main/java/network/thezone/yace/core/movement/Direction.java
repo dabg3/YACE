@@ -1,7 +1,7 @@
 package network.thezone.yace.core.movement;
 
 import network.thezone.yace.core.Color;
-import network.thezone.yace.core.squaremap.Mappable;
+import network.thezone.yace.core.squaremap.Mapper;
 
 import static network.thezone.yace.core.Square.B1;
 import static network.thezone.yace.core.Square.B2;
@@ -28,9 +28,9 @@ public enum Direction {
 
     public static class Value {
 
-        private final Mappable mapping;
+        private final Mapper mapping;
 
-        public Value(Mappable mapping) {
+        public Value(Mapper mapping) {
             this.mapping = mapping;
         }
 

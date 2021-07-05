@@ -5,7 +5,7 @@ import network.thezone.yace.core.Square;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
 
-class Mapping implements Mapper {
+class MapperImpl implements Mapper {
 
     private final int[] fileIndexes;
     private final int[] rankIndexes;
@@ -15,14 +15,15 @@ class Mapping implements Mapper {
     private final IntBinaryOperator diagonalCalculation;
     private final IntBinaryOperator antiDiagonalCalculation;
 
-    private final Square[] INDEX_TO_SQUARE = new Square[Square.values().length];
-    private final long[] FILE_INDEX_TO_FILE = new long[8]; //8 files, 8 ranks on a chess board
-    private final long[] RANK_INDEX_TO_RANK = new long[8];
-    private final long[] DIAGONAL_INDEX_TO_DIAGONAL = new long[15]; //...and 16 diagonals
-    private final long[] ANTIDIAGONAL_INDEX_TO_ANTIDIAGONAL = new long[15];
+    private final Square[] squares = new Square[Square.values().length];
+    //bitboards
+    private final long[] files = new long[8]; //8 files, 8 ranks on a chess board
+    private final long[] ranks = new long[8];
+    private final long[] diagonals = new long[15]; //...and 15 diagonals
+    private final long[] antidiagonals = new long[15];
 
-    Mapping(int[] rankIndexes, int[] fileIndexes, IntBinaryOperator mappingCalculation,
-            ReverseMappingCalculations reverseMappingCalculations, DiagonalsCalculations diagonalsCalculations) {
+    MapperImpl(int[] rankIndexes, int[] fileIndexes, IntBinaryOperator mappingCalculation,
+               ReverseMappingCalculations reverseMappingCalculations, DiagonalsCalculations diagonalsCalculations) {
         this.rankIndexes = rankIndexes;
         this.fileIndexes = fileIndexes;
         this.mappingCalculation = mappingCalculation;
@@ -30,21 +31,22 @@ class Mapping implements Mapper {
         this.reverseFileCalculation = reverseMappingCalculations.getFileReverseCalculation();
         this.diagonalCalculation = diagonalsCalculations.getDiagonalCalculation();
         this.antiDiagonalCalculation = diagonalsCalculations.getAntiDiagonalCalculation();
-        bindSquaresToIndexes();
+        initializeInnerState();
     }
 
-    private void bindSquaresToIndexes() {
+    private void initializeInnerState() {
         for (Square square : Square.values()) {
             int squareIndex = toIndex(square);
-            INDEX_TO_SQUARE[squareIndex] = square;
-            FILE_INDEX_TO_FILE[fileIndexes[fileAt(square)]] |= 1L << squareIndex;
-            RANK_INDEX_TO_RANK[rankIndexes[rankAt(square)]] |= 1L << squareIndex;
-            int diagonalIndex = diagonalCalculation.applyAsInt(rankAt(square), fileAt(square));
-            int antiDiagonalIndex = diagonalCalculation.applyAsInt(rankAt(square), fileAt(square));
-            DIAGONAL_INDEX_TO_DIAGONAL[diagonalIndex] |= 1L << squareIndex;
-            ANTIDIAGONAL_INDEX_TO_ANTIDIAGONAL[antiDiagonalIndex] |= 1L << squareIndex;
+            int fileIndex = fileAt(square);
+            int rankIndex = rankAt(square);
+            int diagonalIndex = diagonalCalculation.applyAsInt(rankIndex, fileIndex);
+            int antidiagonalIndex = diagonalCalculation.applyAsInt(rankIndex, fileIndex);
+            squares[squareIndex] = square;
+            files[fileIndex] |= 1L << squareIndex;
+            ranks[rankIndex] |= 1L << squareIndex;
+            diagonals[diagonalIndex] |= 1L << squareIndex;
+            antidiagonals[antidiagonalIndex] |= 1L << squareIndex;
         }
-        int a = 0;
     }
 
     @Override
@@ -56,15 +58,17 @@ class Mapping implements Mapper {
 
     @Override
     public Square squareAt(int index) {
-        if (index < 0 || index >= INDEX_TO_SQUARE.length)
+        if (index < 0 || index >= squares.length)
             throw new IllegalArgumentException(String.format("index %d cannot be mapped", index));
-        return INDEX_TO_SQUARE[index];
+        return squares[index];
     }
 
+    @Override
     public int rankAt(Square square) {
         return rankIndexes[square.rankNaturalIndex - 1];
     }
 
+    @Override
     public int fileAt(Square square) {
         return fileIndexes[square.fileNaturalIndex - 1];
     }
@@ -80,18 +84,20 @@ class Mapping implements Mapper {
     }
 
     public long getParentDiagonal(Square square) {
-        return 0;
+        int diagonalIndex = diagonalCalculation.applyAsInt(rankAt(square), fileAt(square));
+        return diagonals[diagonalIndex];
     }
 
     public long getParentAntiDiagonal(Square square) {
-        return 0;
+        int antidiagonalIndex = antiDiagonalCalculation.applyAsInt(rankAt(square), fileAt(square));
+        return antidiagonals[antidiagonalIndex];
     }
 
     public long getParentRank(Square square) {
-        return 0;
+        return ranks[rankAt(square)];
     }
 
     public long getParentFile(Square square) {
-        return 0;
+        return files[fileAt(square)];
     }
 }
