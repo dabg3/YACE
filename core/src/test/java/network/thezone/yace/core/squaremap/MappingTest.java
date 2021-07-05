@@ -1,7 +1,7 @@
 package network.thezone.yace.core.squaremap;
 
 import network.thezone.yace.core.Square;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class MappingTest {
 

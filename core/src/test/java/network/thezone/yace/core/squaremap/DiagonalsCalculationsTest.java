@@ -1,6 +1,7 @@
 package network.thezone.yace.core.squaremap;
 
-import org.testng.annotations.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;

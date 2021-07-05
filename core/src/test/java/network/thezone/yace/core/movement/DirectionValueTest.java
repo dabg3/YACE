@@ -1,15 +1,15 @@
 package network.thezone.yace.core.movement;
 
 import network.thezone.yace.core.Color;
-import network.thezone.yace.core.squaremap.Mappable;
+import network.thezone.yace.core.squaremap.Mapper;
 import network.thezone.yace.core.squaremap.MappingBuilder;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class DirectionValueTest {
 
     @Test
     public void movementValuesCalculation_anyMapping_matchMappingCompassRose() {
-        Mappable squareMap = new MappingBuilder()
+        Mapper squareMap = new MappingBuilder()
                 .littleEndianFiles()
                 .littleEndianRanks()
                 .leastSignificantFileOrdering()
