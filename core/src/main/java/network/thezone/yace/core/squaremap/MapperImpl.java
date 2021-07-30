@@ -7,6 +7,9 @@ import java.util.function.IntUnaryOperator;
 
 class MapperImpl implements Mapper {
 
+    private static final int DIAGONALS_NUM_CHESSBOARD = 15;
+    private static final int RANKS_FILES_NUM_CHESSBOARD = 8;
+
     private final int[] fileIndexes;
     private final int[] rankIndexes;
     private final IntBinaryOperator mappingCalculation;
@@ -17,10 +20,10 @@ class MapperImpl implements Mapper {
 
     private final Square[] squares = new Square[Square.values().length];
     //bitboards
-    private final long[] files = new long[8]; //8 files, 8 ranks on a chess board
-    private final long[] ranks = new long[8];
-    private final long[] diagonals = new long[15]; //...and 15 diagonals
-    private final long[] antidiagonals = new long[15];
+    private final long[] files = new long[RANKS_FILES_NUM_CHESSBOARD];
+    private final long[] ranks = new long[RANKS_FILES_NUM_CHESSBOARD];
+    private final long[] diagonals = new long[DIAGONALS_NUM_CHESSBOARD];
+    private final long[] antidiagonals = new long[DIAGONALS_NUM_CHESSBOARD];
 
     MapperImpl(int[] rankIndexes, int[] fileIndexes, IntBinaryOperator mappingCalculation,
                ReverseMappingCalculations reverseMappingCalculations, DiagonalsCalculations diagonalsCalculations) {

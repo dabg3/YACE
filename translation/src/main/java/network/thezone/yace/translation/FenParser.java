@@ -3,7 +3,7 @@ package network.thezone.yace.translation;
 import network.thezone.yace.core.Color;
 import network.thezone.yace.core.PieceID;
 import network.thezone.yace.core.Square;
-import network.thezone.yace.core.squaremap.Mappable;
+import network.thezone.yace.core.squaremap.Mapper;
 import network.thezone.yace.core.squaremap.MappingBuilder;
 
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class FenParser {
 
-    private static final Mappable FEN_MAPPING = new MappingBuilder()
+    private static final Mapper FEN_MAPPING = new MappingBuilder()
             .littleEndianFiles()
             .bigEndianRanks()
             .leastSignificantFileOrdering()
